@@ -47,7 +47,11 @@ def validattion_duplicates(x1, y1, x2, y2, threshold = 25):
     return dist_x, dist_y, pred
 
 
-def extract_segmentation(im_fake, crop_size, j, n):
+def extract_segmentation(im_fake, im_gt, crop_size, j, n):
+    
+    im_mask_labeled = label(im_mask)
+    props_gt = regionprops_table(im_mask_labeled, properties=('centroid', 'major_axis_length', 'minor_axis_length'))
+    props_gt = pd.DataFrame(props_gt)
     
     thresholded_labeled, props_out = clean_outputs(im_fake, j=j, n=n)
 
@@ -78,5 +82,5 @@ def extract_segmentation(im_fake, crop_size, j, n):
         labels.append(index)
 
     
-    return np.array(seg_imgs), np.array(labels)
+    return np.array(seg_imgs), np.array(labels), gt
 
