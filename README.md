@@ -11,4 +11,5 @@ Necessary libraries:
 </ul>
 
 
-    ![xx](imgs/vgg.png)
+### Classifier model
+![classifier model](imgs/vgg.png)
